@@ -33,8 +33,20 @@ app.get("/", function(req,res){
 // fake database
 const fruits = ["apple","banana","orange"];
 
+// if a url has a questions mark what ever follows is a query
+//  "/fruits?name=Sean"
+// request.query = {name: "Sean"}
+
 // fruits index - show all fruits
 app.get("/fruits", function (req, res){
+
+    if(req.query.filter){
+        const filtered = fruits.filter((fruits =>{
+            return fruits.includes(req.query.filter)
+        }))
+        return res.send(filtered)
+    }
+
     res.send(fruits)
 })
 /* ====== Params -> a variable built into our route ====== */
