@@ -30,14 +30,37 @@ app.get("/", function(req,res){
 })
 
 // ==== fruit routes aka RESTFUL ROUTING ====
+
+
+/* 
+    CRUD
+        C-reate
+        R-ead
+        U-date
+        D-estory
+*/
+/* 
+    Restful routes
+    Index  - GET       - /fruits       -> presentational
+    New    - GET       - /fruits/new   -> Presentational Form
+    create - POST      - /fruits       -> Functional
+    show   - GET       - /fruits/index -> Presentational
+    edit   - GET       - /fruits/index -> Presentational Form
+    update - PUT/PATCH - /fruits/index -> Functional
+    delete - DELETE    - /fruits/index -> Funtional
+*/
+
+
 // fake database
 const fruits = ["apple","banana","orange"];
 
+/* ==== Query ==== */
 // if a url has a questions mark what ever follows is a query
 //  "/fruits?name=Sean"
 // request.query = {name: "Sean"}
 
 // fruits index - show all fruits
+    // Index  - GET       - /fruits       -> presentational
 app.get("/fruits", function (req, res){
 
     if(req.query.filter){
@@ -52,6 +75,7 @@ app.get("/fruits", function (req, res){
 /* ====== Params -> a variable built into our route ====== */
 
 // fruit show - show a specific fruit
+    // show   - GET       - /fruits/index -> Presentational
 app.get("/fruits/0", function (req, res){
     res.send(fruits[0])
 })
