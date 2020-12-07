@@ -1,3 +1,4 @@
+
 /* ===== External Modules ===== */
 // not our code
 const express = require("express");
@@ -27,6 +28,39 @@ const PORT = 4000;
 app.get("/", function(req,res){
     res.send("Hello world")
 })
+
+// ==== fruit routes aka RESTFUL ROUTING ====
+// fake database
+const fruits = ["apple","banana","orange"];
+
+// fruits index - show all fruits
+app.get("/fruits", function (req, res){
+    res.send(fruits)
+})
+/* ====== Params -> a variable built into our route ====== */
+
+// fruit show - show a specific fruit
+app.get("/fruits/0", function (req, res){
+    res.send(fruits[0])
+})
+
+/* ===== order matters ===== */
+// cool fruits route doesnt work because comes after the params app.get
+app.get("/fruits/cool", function (req, res){
+    res.send("Fruits are cool")
+})
+// params
+app.get("/fruits/:index", function (req, res){
+    const index = req.params.index
+    res.send(`This is your fruit ${fruits[index]}`)
+})
+// fruits with name
+app.get("/fruits/:index/:name", function (req, res){
+    const index = req.params.index
+    res.send(`${req.params.name} is looking for ${fruits[index]}`)
+})
+
+
 
 /* ====== sever bind ====== */
 // binds the application to the port via app.listen
